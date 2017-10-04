@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-<?php
-
-
- ?>
-=======
 <form class="form-horizontal">
 <fieldset>
 
@@ -47,4 +41,3 @@
 
 </fieldset>
 </form>
->>>>>>> BranchErin
