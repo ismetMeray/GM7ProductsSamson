@@ -8,7 +8,48 @@ include_once 'Crud.php';
 <link rel="stylesheet" href="Style.css" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".input-bx").on('focus', 'input',function(){
+        $('label[for='+$(this).attr('id')+']').addClass('input-bx-label');
+        $(".input-bx input").addClass('input-bx-focus');
+    });
+
+    $(".input-bx input").on('blur',function(){
+      if($(this).val()!=""){
+        $(this)
+          .addClass('input-bx-focus-out-true')
+          .removeClass('input-bx-focus-out-false');
+      }else{
+        $(this)
+          .addClass('input-bx-focus-out-false')
+          .removeClass('input-bx-focus-out-true');
+      }
+
+    });
+$('#login-modal').modal('show');
+});
+
+
+$(document).ready(function() {
+    $("#ajaxButton").click(function() {
+        $.ajax({
+              type: "Post",
+              url: "Crud.php",
+              success: function(data) {
+                    var obj = $.parseJSON(data);
+                    var result = "<ul>"
+                    $.each(obj, function() {
+                        result = result + "<li>First Name : " + this['firstname'] + " , Last Name : " + this['lastname'] + "</li>";
+                    });
+                    result = result + "</ul>"
+                    $("#result").html(result);
+              }
+        });
+    });
+});</script>
 </head>
 
 <body>
@@ -63,38 +104,66 @@ else
 <table width="100%" border="1" cellpadding="15" align="center">
 <?php
 $res = $MySQLiconn->query("SELECT * FROM Producten");
+$i = 0;
 while($row=$res->fetch_array())
 {
+    $i++
  ?>
     <tr>
     <td><?php echo $row['Serienummer']; ?></td>
     <td><?php echo $row['Product']; ?></td>
     <td><?php echo $row['Productiedatum']; ?></td>
     <td><?php echo $row['Opmerking']; ?></td>
-    <td><button id="myBtn" data-toggle="modal" data-target="#myModal">edit</button></td>
+    <td><button id="<?php echo $i ?>" data-toggle="modal" data-target="#myModal">edit</button></td>
     <td><a href="?del=<?php echo $row['Serienummer']; ?>" onclick="return confirm('sure to delete !'); " >delete</a></td>
     </tr>
     <?php
 }
 ?>
-<div id="myModal" class="modal">
+<div class="modal  fade" id="myModal"  >
+<form id="loginform" class="form-horizontal" role="form" method="post">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header ">
+            <h4 class="modal-title " id="myModalLabel"><span></span>Product Wijzigen</h4>
+        </div>
+        <div class="modal-body">
+            <div id="login">
+                <section class="Product-toevoegen" >
 
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="container">
-     <div class="row" style="margin: auto">
+                            <label class="labelCss" for="form_user">Serienummer</label>
+                        <div class="input-bx">
+                        <input type="text" name="Serienummer" class="txtField" value="<?php echo $row['Serienummer']; ?>">
+                        </div>
 
-         <div class="panel-body">
-    	  <label>Serienummer :</label><input type='text' class='form-control'  placeholder="Serienummer"  />
-          <label>Product : </label><input type='text' class='form-control'  placeholder="Product" />
-    	  <label>Productiedatum: </label><input type='text' class='form-control'  placeholder="Productiedatum" />
-    	  <label>Opmerking : </label><input type='text' class='form-control'  placeholder="Opmerking" />
-      </div>
-     </div>
-    </div>
+                            <label class="labelCss" for="form_pass">Product</label>
+                        <div class="input-bx">
+                            <input id="form_pass" name="form_pass"   type="text" class="form-control" required="" />
+                        </div>
 
-  </div>
+                            <label class="labelCss" for="form_pass">Productiedatum</label>
+                                <div class='right-inner-addon date datepicker' data-date-format="dd-mm-yyy">
+        		                    <input name='name' value="<?php ?>" type="date" class="form-control date-picker" data-date-format="dd-mm-yyy" style="text-align: center"/>
+      			             </div>
 
+                            <label class="labelCss" for="form_pass">Opmerking</label>
+                        <div class="input-bx">
+                            <textarea id="form_pass" name="form_pass" type="text" class="form-control" required=""></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                         <!--<button type="button" id="register" class="btn btn-primary"><span class="glyphicon glyphicon-hand-right"></span> Product Toevoegen</button>-->
+                            <a href="?edit=<?php echo $row['Serienummer']; ?>" class="btn btn-primary" onclick="return confirm('sure to update !'); " >Product Wijzigen</a>
+                       </div><!-- /.modal-footer -->
+
+
+                </section>
+            </div>
+        </div><!-- /.modal-body -->
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</form><!-- form -->
 </div>
 
 </table>
