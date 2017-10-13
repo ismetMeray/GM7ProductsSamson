@@ -6,10 +6,12 @@ include_once 'db.php';
 if(isset($_POST['save']))
 {
 
-     $fn = $MySQLiconn->real_escape_string($_POST['fn']);
-     $ln = $MySQLiconn->real_escape_string($_POST['ln']);
+     $Serienummer = $MySQLiconn->real_escape_string($_POST['Serienummer']);
+     $Product = $MySQLiconn->real_escape_string($_POST['Product']);
+     $Productiedatum = $MySQLiconn->real_escape_string($_POST['Productiedatum']);
+     $Opmerking = $MySQLiconn->real_escape_string($_POST['Opmerking']);
 
-  $SQL = $MySQLiconn->query("INSERT INTO Producten(fn,ln) VALUES('$fn','$ln')");
+  $SQL = $MySQLiconn->query("INSERT INTO Producten(Serienummer, Product, Productiedatum, Opmerking) VALUES('$Serienummer','$Product', '$Productiedatum', '$Opmerking')");
 
   if(!$SQL)
   {
@@ -22,7 +24,7 @@ if(isset($_POST['save']))
 /* code for data delete */
 if(isset($_GET['del']))
 {
- $SQL = $MySQLiconn->query("DELETE FROM data WHERE id=".$_GET['del']);
+ $SQL = $MySQLiconn->query("DELETE FROM Producten WHERE Serienummer=".$_GET['del']);
  header("Location: index.php");
 }
 /* code for data delete */
@@ -32,13 +34,13 @@ if(isset($_GET['del']))
 /* code for data update */
 if(isset($_GET['edit']))
 {
- $SQL = $MySQLiconn->query("SELECT * FROM data WHERE id=".$_GET['edit']);
+ $SQL = $MySQLiconn->query("SELECT * FROM Product WHERE Serienummer=".$_GET['edit']);
  $getROW = $SQL->fetch_array();
 }
 
 if(isset($_POST['update']))
 {
- $SQL = $MySQLiconn->query("UPDATE data SET fn='".$_POST['fn']."', ln='".$_POST['ln']."' WHERE id=".$_GET['edit']);
+ $SQL = $MySQLiconn->query("UPDATE Product SET Product='".$_POST['Product']."', Productiedatum='".$_POST['Productiedatum']."' WHERE Serienummer=".$_GET['Serienummer']);
  header("Location: index.php");
 }
 /* code for data update */

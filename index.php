@@ -12,48 +12,35 @@ include_once 'Crud.php';
 </head>
 
 <body>
-    <form class="form-horizontal">
-    <fieldset>
-
-    <!-- Form Name -->
-
-    <!-- Text input-->
-    <div class="form-group">
-    <label class="col-md-4 control-label" for="serialnumber">Serienummer</label>
+<center>
+<br />
+<div id="form">
+<form class="form-horizontal" method="post">
+<fieldset>
+<div class="form-group">
+    <label class="col-md-4 control-label" for="comments">Serienummer</label>
     <div class="col-md-4">
-    <input id="serialnumber" name="serialnumber" type="text" placeholder="Serienummer" class="form-control input-md" required="">
-
+        <td><input type="text" name="Serienummer" placeholder="Serienummer" value="<?php if(isset($_GET['edit'])) echo $getROW['Serienummer'];  ?>" /></td>
     </div>
-    </div>
-
-    <!-- Text input-->
-    <div class="form-group">
-    <label class="col-md-4 control-label" for="productname">Product</label>
+</div>
+<div class="form-group">
+    <label class="col-md-4 control-label" for="comments">Product</label>
     <div class="col-md-4">
-    <input id="productname" name="productname" type="text" placeholder="Product" class="form-control input-md" required="">
-
+        <td><input type="text" name="Product" placeholder="Product" value="<?php if(isset($_GET['edit'])) echo $getROW['Product'];  ?>" /></td>
     </div>
-    </div>
-
-    <!-- Text input-->
-    <div class="form-group">
-    <label class="col-md-4 control-label" for="productiondate">Productie datum</label>
+</div>
+<div class="form-group">
+    <label class="col-md-4 control-label" for="comments">productiedatum</label>
     <div class="col-md-4">
-    <input id="productiondate" name="productiondate" type="text" placeholder="placeholder" class="form-control input-md" required="">
-
+        <td><input type="date" name="Productiedatum" placeholder="Productiedatum" value="<?php if(isset($_GET['edit'])) echo $getROW['Productiedatum'];  ?>" /></td>
     </div>
-    </div>
-
-    <!-- Textarea -->
-    <div class="form-group">
+</div>
+<div class="form-group">
     <label class="col-md-4 control-label" for="comments">Opmerkingen</label>
     <div class="col-md-4">
-    <textarea class="form-control" id="comments" name="comments"></textarea>
+        <td><textarea type="text" name="Opmerking" placeholder="Opmerking" value="<?php if(isset($_GET['edit'])) echo $getROW['Opmerking'];  ?>"></textarea></td>
     </div>
-    </div>
-
-    </fieldset>
-    </form>
+</div>
 <?php
 if(isset($_GET['edit']))
 {
@@ -68,9 +55,7 @@ else
  <?php
 }
 ?>
-</td>
-</tr>
-</table>
+</fieldset>
 </form>
 
 <br /><br />
@@ -84,14 +69,37 @@ while($row=$res->fetch_array())
     <tr>
     <td><?php echo $row['Serienummer']; ?></td>
     <td><?php echo $row['Product']; ?></td>
-    <td><?php echo $row['Productie datum']; ?></td>
+    <td><?php echo $row['Productiedatum']; ?></td>
     <td><?php echo $row['Opmerking']; ?></td>
-    <td><a href="?edit=<?php echo $row['id']; ?>" onclick="return confirm('sure to edit !'); " >edit</a></td>
-    <td><a href="?del=<?php echo $row['id']; ?>" onclick="return confirm('sure to delete !'); " >delete</a></td>
+    <td><button id="myBtn" data-toggle="modal" data-target="#myModal">edit</button></td>
+    <td><a href="?del=<?php echo $row['Serienummer']; ?>" onclick="return confirm('sure to delete !'); " >delete</a></td>
     </tr>
     <?php
 }
 ?>
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="container">
+     <div class="row" style="align:center">
+      <div class="col-md-6">
+         <div class="panel-body" style="align:center">
+    	  <label>Name</label><input type='text' class='form-control'  value='just'  disabled>
+          <label>Last name : </label><input type='text' class='form-control'  value='just' disabled>
+    	  <label>Gender : </label><input type='text' class='form-control'  value='just' disabled>
+    	  <label>Street : </label><input type='text' class='form-control'  value='just' disabled>
+    	  <label>Email :</label><input type='text' class='form-control'  value='just' disabled>
+          <label>Number telephone :</label><input type='text' class='form-control'  value='just' disabled>
+       </div>
+      </div>
+     </div>
+    </div>
+
+  </div>
+
+</div>
+
 </table>
 </div>
 </center>

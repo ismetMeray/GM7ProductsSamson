@@ -10,3 +10,4 @@
      {
        die("ERROR : -> ".$MySQLiconn->connect_error);
      }
+?>
