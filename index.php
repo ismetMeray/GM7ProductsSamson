@@ -5,7 +5,7 @@ include_once 'Crud.php';
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="Style.css" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -82,16 +82,13 @@ while($row=$res->fetch_array())
   <div class="modal-content">
     <span class="close">&times;</span>
     <div class="container">
-     <div class="row" style="align:center">
-      <div class="col-md-6">
-         <div class="panel-body" style="align:center">
-    	  <label>Name</label><input type='text' class='form-control'  value='just'  disabled>
-          <label>Last name : </label><input type='text' class='form-control'  value='just' disabled>
-    	  <label>Gender : </label><input type='text' class='form-control'  value='just' disabled>
-    	  <label>Street : </label><input type='text' class='form-control'  value='just' disabled>
-    	  <label>Email :</label><input type='text' class='form-control'  value='just' disabled>
-          <label>Number telephone :</label><input type='text' class='form-control'  value='just' disabled>
-       </div>
+     <div class="row" style="margin: auto">
+
+         <div class="panel-body">
+    	  <label>Serienummer :</label><input type='text' class='form-control'  placeholder="Serienummer"  />
+          <label>Product : </label><input type='text' class='form-control'  placeholder="Product" />
+    	  <label>Productiedatum: </label><input type='text' class='form-control'  placeholder="Productiedatum" />
+    	  <label>Opmerking : </label><input type='text' class='form-control'  placeholder="Opmerking" />
       </div>
      </div>
     </div>
