@@ -33,23 +33,11 @@ $('#login-modal').modal('show');
 });
 
 
-$(document).ready(function() {
-    $("#ajaxButton").click(function() {
-        $.ajax({
-              type: "Post",
-              url: "Crud.php",
-              success: function(data) {
-                    var obj = $.parseJSON(data);
-                    var result = "<ul>"
-                    $.each(obj, function() {
-                        result = result + "<li>First Name : " + this['firstname'] + " , Last Name : " + this['lastname'] + "</li>";
-                    });
-                    result = result + "</ul>"
-                    $("#result").html(result);
-              }
-        });
-    });
-});</script>
+$("button").click(function() {
+    //alert(this.id);
+    alert($(this).attr('id'));
+});
+</script>
 </head>
 
 <body>
@@ -114,7 +102,7 @@ while($row=$res->fetch_array())
     <td><?php echo $row['Product']; ?></td>
     <td><?php echo $row['Productiedatum']; ?></td>
     <td><?php echo $row['Opmerking']; ?></td>
-    <td><button id="<?php echo $i ?>" data-toggle="modal" data-target="#myModal">edit</button></td>
+    <td><button id="<?php echo $i ?>" data-toggle="modal" data-target="#myModal" onclick="alert(this.id)">edit</button></td>
     <td><a href="?del=<?php echo $row['Serienummer']; ?>" onclick="return confirm('sure to delete !'); " >delete</a></td>
     </tr>
     <?php
