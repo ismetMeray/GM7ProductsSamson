@@ -3,13 +3,13 @@ include_once 'Crud.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="Style.css" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
 <script>
 $(document).ready(function(){
     $(".input-bx").on('focus', 'input',function(){
@@ -34,11 +34,29 @@ $(document).ready(function(){
 $('#login-modal').modal('show');
 });
 </script>
+<script>
+var selectRowData = function(clicked_id){
+  var serial = "";
+  var productName = "";
+  var date = null;
+  var comment = "";
 
+    serial = document.getElementById('serial' + clicked_id).innerHTML;
+    productName = document.getElementById('productName' + clicked_id).innerHTML;
+    date = document.getElementById('date' + clicked_id).innerHTML;
+    comment = document.getElementById('comment' + clicked_id).innerHTML;
+    console.log(date);
+
+    $("#serialField").val(serial);
+    $("#productNameField").val(productName);
+    $("#dateField").val(date);
+    $("#commentField").val(comment);
+};
+</script>
 </head>
-
 <body>
 <br/>
+<div>
 <center>
 <div id="form">
 <form class="form-horizontal" method="post">
@@ -85,20 +103,6 @@ if(isset($_GET['edit'])){
 <br /><br />
 
 <table width="100%" border="1" cellpadding="15" align="center">
-  <script>
-  var selectRowData = function(clicked_id){
-    var serial = "";
-    var productName = "";
-    var date = "";
-    var comment = "";
-
-      serial = document.getElementById('serial' + clicked_id).innerHTML;
-      productName = document.getElementById('productName' + clicked_id).innerHTML;
-      date = document.getElementById('date' + clicked_id).innerHTML;
-      comment = document.getElementById('comment' + clicked_id).innerHTML;
-      console.log(productName);
-  };
-  </script>
 <?php
 $result = $MySQLiconn->query("SELECT * FROM Producten");
 $i = 0;
@@ -133,20 +137,20 @@ while($row=$result->fetch_array())
             <div id="login">
                 <section class="Product-toevoegen" >
                             <label class="labelCss" for="form_user">Serienummer</label>
-                        <div class="input-bx">
-                        <input type="text" name="Serienummer" class="txtField" value="<?php echo $row['Serienummer']; ?>">
+                        <div class="input-bx, right-inner-addon date datepicker">
+                        <input id="serialField" type="text" name="Serienummer" class="form-control" value="">
                         </div>
                             <label class="labelCss" for="form_pass">Product</label>
-                        <div class="input-bx">
-                            <input id="form_pass" name="form_pass"   type="text" class="form-control" required="" />
+                        <div class="input-bx, right-inner-addon date datepicker">
+                            <input id="productNameField" name="form_pass"   type="text" class="form-control" required="" value=""/>
                         </div>
                             <label class="labelCss" for="form_pass">Productiedatum</label>
-                                <div class='right-inner-addon date datepicker' data-date-format="dd-mm-yyy">
-        		                    <input name='name' value="<?php ?>" type="date" class="form-control date-picker" data-date-format="dd-mm-yyy" style="text-align: center"/>
+                                <div class='right-inner-addon date datepicker' data-date-format="dd-mm-yyyy">
+        		                    <input id="dateField" name='name' value="<?php ?>" type="text" data-date-format="yyyy-mm-dd" style="text-align: center"/>
       			             </div>
                             <label class="labelCss" for="form_pass">Opmerking</label>
-                        <div class="input-bx">
-                            <textarea id="form_pass" name="form_pass" type="text" class="form-control" required=""></textarea>
+                        <div class="input-bx,right-inner-addon date datepicker">
+                            <textarea id="commentField" name="form_pass" type="text" class="form-control" required="" value=""></textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -164,6 +168,7 @@ while($row=$result->fetch_array())
 </div>
 
 </table>
+</div>
 </div>
 </body>
 </html>

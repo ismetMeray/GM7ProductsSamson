@@ -61,5 +61,9 @@ table,td
     display: block;
     text-align: center;
 }
-#productForm{
+.popupField{
+  display:block;
+  align-content: center;
+  text-align: center;
+  margin: auto;
 }
