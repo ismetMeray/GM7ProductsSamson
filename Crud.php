@@ -1,6 +1,7 @@
 <?php
 
-include_once 'db.php';
+include_once 'config.php';
+
 
 $Product_ID = $MySQLiconn->real_escape_string($_POST['Product_ID']);
 $Serienummer = $MySQLiconn->real_escape_string($_POST['Serienummer']);
@@ -45,7 +46,7 @@ if(isset($_POST['receive']))
 if(isset($_GET['del']))
 {
  $SQL = $MySQLiconn->query("DELETE FROM Producten WHERE Product_ID=".$_GET['del']);
- header("Location: index.php");
+ header("Location: view.php");
 }
 /* code for data delete */
 
@@ -62,7 +63,7 @@ if(isset($_GET['edit']))
 if(isset($_POST['update'])){
 
  $SQL = $MySQLiconn->query("UPDATE Producten set Serienummer = '".$_POST['Serienummer']."', ProductNaam = '".$_POST['ProductNaam']."', Productiedatum = '".$_POST['Productiedatum']."', Opmerking = '".$_POST['Opmerking']."', Type = '".$_POST['Type']."' WHERE Product_ID=".$_GET['edit']);
- header("Location: index.php");
+ header("Location: view.php");
 }
 /* code for data update */
 
