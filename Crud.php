@@ -2,6 +2,7 @@
 
 include_once 'db.php';
 
+$Product_ID = $MySQLiconn->real_escape_string($_POST['Product_ID']);
 $Serienummer = $MySQLiconn->real_escape_string($_POST['Serienummer']);
 $Product = $MySQLiconn->real_escape_string($_POST['Product']);
 $Productiedatum = $MySQLiconn->real_escape_string($_POST['Productiedatum']);
@@ -43,15 +44,7 @@ if(isset($_GET['del']))
 {
 <<<<<<< HEAD
  $SQL = $MySQLiconn->query("DELETE FROM Producten WHERE Product_ID=".$_GET['del']);
-<<<<<<< HEAD
- header("Location: view.php");
-=======
- $SQL = $MySQLiconn->query("DELETE FROM Producten WHERE Serienummer=".$_GET['del']);
  header("Location: index.php");
->>>>>>> parent of 1d5ee18... Change is view, crud working
-=======
- header("Location: index.php");
->>>>>>> parent of b313dc4... login view test
 }
 /* code for data delete */
 
@@ -63,17 +56,7 @@ if(isset($_GET['del']))
 if(isset($_POST['update'])){
 
  $SQL = $MySQLiconn->query("UPDATE Producten set Serienummer = '".$_POST['Serienummer']."', ProductNaam = '".$_POST['ProductNaam']."', Productiedatum = '".$_POST['Productiedatum']."', Opmerking = '".$_POST['Opmerking']."', Type = '".$_POST['Type']."' WHERE Product_ID=".$_GET['edit']);
-<<<<<<< HEAD
- header("Location: view.php");
-=======
-if(isset($_POST['update']))
-{
- $SQL = $MySQLiconn->query("UPDATE Producten SET Serienummer = '$Serienummer', Product = '$Product', Productiedatum = '$Productiedatum', Opmerking = '$Opmerking' WHERE Serienummer = $Serienummer, Product = $Product, Productiedatum = $Productiedatum, Opmerking = $Opmerking");
  header("Location: index.php");
->>>>>>> parent of 1d5ee18... Change is view, crud working
-=======
- header("Location: index.php");
->>>>>>> parent of b313dc4... login view test
 }
 /* code for data update */
 
