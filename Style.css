@@ -1,3 +1,5 @@
+/html>
+
 Style.Css
 /* CSS Document */
 
@@ -7,7 +9,7 @@ Style.Css
 
  margin:0px auto;
  text-align:center;
-<?php if(isset($_GET['edit'])) echo $getROW['fn'];  ?>
+
 }
 #form form input
 {
@@ -35,16 +37,33 @@ table,td
   padding-left: 10px;
   padding-top: 20px;
 }
-.Stuck{
-    position: fixed;
-    left: 50%;
-    width:50%;
+
+.input-bx input:focus{
+  height: 60px;
 }
-.muishover:hover{
-background-color: grey;
+.input-bx-focus{
+      border: 1px solid green;
+      background-color: rgb(250, 255, 189);
+    -webkit-box-shadow: 1px;
+    -moz-box-shadow: 1px;
+    box-shadow: 1px;
+    padding: 3px;
+    padding-left: 10px;
 }
-#grootteinput{
-    word-break: break-word;
-    width:300px;
-    height: 50px;
+.input-bx-focus-out-true{
+  height: 60px;
+}
+
+.input-bx-focus-out-false{
+  height: 30px;
+}
+.labelCss{
+    display: block;
+    text-align: center;
+}
+.popupField{
+  display:block;
+  align-content: center;
+  text-align: center;
+  margin: auto;
 }
